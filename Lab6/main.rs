@@ -8,7 +8,7 @@ fn main() {
     let deg_freedom = input_vec[1];
     let t_val = input_vec[0];
 
-    let curve_area = simpsons(0.0,t_val,deg_freedom);
+    let curve_area = simpsons(0.0 - t_val,t_val,deg_freedom) / 2.0;
     println!("{}", curve_area);
     let mut tails_input = String::new();
     let final_output: f32;
@@ -79,6 +79,7 @@ fn simpsons(a:f32, b:f32, deg_freedom: f32) -> f32{
         let mut odd_sum = 0.0;
         let mut even_sum = 0.0;
         let h:f32 = (b - a) / (n as f32);
+        println!("h: {}, n: {}", h, n);
         for i in 0..n{
             if i%2 == 0 {
                 even_sum = even_sum + dist(a + i as f32*h, deg_freedom)
@@ -90,7 +91,6 @@ fn simpsons(a:f32, b:f32, deg_freedom: f32) -> f32{
         let output = (h/3.0) * (a + b + 4.0*odd_sum + 2.0 * even_sum);
         if n != 4 {
             error = (output - output_vec[output_vec.len() - 1] as f32).abs();
-            println!("{}", error);
         }
         output_vec.push(output)
 
