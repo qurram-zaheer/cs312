@@ -1,6 +1,7 @@
 use std::io;
 use std::f32::consts::PI;
 use std::f32;
+use std::process;
 
 fn main() {
     let input_vec: Vec<f32> = input_vars();
@@ -49,6 +50,10 @@ fn input_vars() -> Vec<f32>{
         .read_line(&mut deg_freedom_input)
         .expect("Unable to read from stdin!");
     let deg_freedom: f32 = deg_freedom_input.trim().parse().expect("Please enter a valid float");
+    if deg_freedom <= 0.0 || t_val < 0.0{
+        println!("Please enter >0 value for deg_freedon and >=0 value for t");
+        process::exit(1);
+    }
     input_vars.push(t_val);
     input_vars.push(deg_freedom);
     input_vars
